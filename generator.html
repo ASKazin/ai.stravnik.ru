@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Генератор заявления на митинг</title>
+</head>
+<body><br>
+
+<form action="gen.php" method="post">
+
+<b>ФИО организатора <br></b>
+<input type="text" placeholder="Иван Иванов Иванович" name="Fff"><br><br>
+
+<b>Телефон организатора <br></b>
+<input type="text" placeholder="79290001234" name="tel"><br><br>
+
+<b>Цель мероприятия <br></b>
+<input type="text" placeholder="Привлечь внимание к ограничению гражданских свобод" name="purpose" size=53><br><br>
+
+<b>Форма публичного мероприятия <br></b>
+<input type="text" placeholder="Пикетирование" name="form"><br><br>
+
+<b>Место проведения мероприятия <br></b>
+<input type="text" placeholder="Сквер Пушкина" name="place"><br><br>
+
+<b>Дата, время начала и окончания публичного мероприятия<br></b>
+<input type="text" placeholder="10 августа 2020 с 18:30 до 19:30 часов" name="date" size=36><br><br>
+
+<b>Предполагаемое количество участников публичного мероприятия<br></b>
+<input type="text" placeholder="1500" name="num"><br><br>
+
+<b>Звукоусиливающая аппаратура</b><br>
+<select name="sound">
+  <option value="1">Будет использоваться</option>
+  <option value="0">Не будет использоваться</option>
+</select><br><br>
+
+<p><input type="submit" value="Отправить"></p>
+
+</form>
+
+</body>
+</html>
