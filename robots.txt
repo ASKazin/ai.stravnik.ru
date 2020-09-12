@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /uploads
+Disallow: /scripts
+Host: https://ai.stravnik.ru/
+Sitemap: https://ai.stravnik.ru/sitemap.xml

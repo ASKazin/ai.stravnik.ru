@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <!-- Start META -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="icon" href="https://ai.stravnik.ru/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="https://ai.stravnik.ru/favicon.ico" type="image/x-icon">
+    <meta name="description" content="<?php echo $pageDesc; ?>"/>
+    <!-- TITLE -->
+    <title><?php echo $pageTitle; ?></title>
+    <!-- Start Sheets CSS -->
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css">
+
+    <link href="/css/sticky-footer-navbar.css" rel="stylesheet" type="text/css">
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-min.js"></script>
+
+    <!--[if lt IE 9]>
+    <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+<body>
+
+<!-- Static navbar -->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="<?php echo BEZ_HOST; ?>?mode=index">Свобода собраний</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <?php include 'check.php'; ?>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</nav>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12"> <!--  col-md-offset-1 -->
+            <div class="blog-header page-header hidden-print">
+                <h2><?php echo $h1Title; ?></h2>
+                <h3><?php echo $subTitle; ?></h3>
+            </div>
+            <?php echo $content; ?>
+        </div>
+    </div>
+</div>
+
+<div class="clearfix hidden-print"></div>
+
+<footer class="footer hidden-print">
+    <div class="container">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-sm-6 copyright">
+                    <a href="https://ai.stravnik.ru/">Свобода собраний</a> &copy; <small>2020</small>
+                </div>
+                <div class="col-sm-6 contact">
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Yandex.Metrika counter --> <script type="text/javascript" > (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)}) (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym"); ym(67267708, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true, trackHash:true }); </script> <noscript><div><img src="https://mc.yandex.ru/watch/67267708" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
+
+<script>
+    $('#user_office').selectize({
+        sortField: 'text'
+    });
+</script>
+
+<script>
+    $(function () {
+        $('.navbar a').each(function () {
+            var location = window.location.href;
+            var link = this.href;
+            if (location == link) {
+                $(this).addClass('active');
+            }
+        });
+        $('.well a').each(function () {
+            var location = window.location.href;
+            var link = this.href;
+            if (location == link) {
+                $(this).addClass('active');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
