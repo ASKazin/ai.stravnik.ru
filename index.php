@@ -64,6 +64,10 @@ switch ($mode) {
         include 'scripts/event/event.html';
         break;
 
+    case 'legal':
+        include 'scripts/legal/politika-konfidencialnosti.html';
+        break;
+
     // Подключаем обработчик главной страницы
     case 'index':
     case '':
