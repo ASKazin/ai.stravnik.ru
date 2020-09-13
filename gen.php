@@ -63,7 +63,9 @@ file_put_contents($filename, $file); # сохраняем изменения в 
 
 $command_done = ('cd uploads/' . $hash_with_salt . '/xml/example_docx_unzip; zip ../1.docx -r *'); # собираем docx обратно в папку uploads с названием $hash_and_salt
 
-if (exec($command_done)) {
+$public_var = isset($_POST['public']) ? $_POST['public'] : '';
+
+if (exec($command_done) and !empty($public_var)) {
 
     // Подключаем конфигурационный файл
     include 'config.php';
