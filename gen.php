@@ -64,8 +64,9 @@ file_put_contents($filename, $file); # сохраняем изменения в 
 $command_done = ('cd uploads/' . $hash_with_salt . '/xml/example_docx_unzip; zip ../1.docx -r *'); # собираем docx обратно в папку uploads с названием $hash_and_salt
 
 $public_var = isset($_POST['public']) ? $_POST['public'] : '';
+$exec_check = exec($command_done);
 
-if (exec($command_done) and !empty($public_var)) {
+if ($exec_check and !empty($public_var)) {
 
     // Подключаем конфигурационный файл
     include 'config.php';
@@ -107,7 +108,13 @@ if (exec($command_done) and !empty($public_var)) {
         echo '</pre>';
     }
 } else {
-    echo 'Ошибка при формировании уведомления.';
+    if(empty($public_var)){
+        if($exec_check){
+            echo("<html><br><br><br><link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\" integrity=\"sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm\" crossorigin=\"anonymous\"><center><h2>Документ готов для скачивания</h2><center><br><a href=\"uploads/" . $hash_with_salt . "/xml/1.docx\" class=\"btn btn-primary btn-lg active\" role=\"button\" aria-pressed=\"true\">Скачать уведомление</a>"); # Выводим ссылку для скачивания
+        } else {
+            echo 'Ошибка при формировании уведомления.';
+        }
+    }
 }
 
 ?>
