@@ -12,9 +12,9 @@ $result = 'SELECT COUNT(id) FROM `requests`';
 $stmt = $db->prepare($result);
 $stmt->execute();
 $requests = $stmt->fetchColumn();
-$subTitle = 'Всего поданных заявок: ' . $requests;
+$subTitle = 'Всего поданных уведомлений: ' . $requests;
 
-// Запрос на выборку заявок
+// Запрос на выборку уведомлений
 $sql = 'SELECT * FROM `requests`';
 $stmt = $db->prepare($sql);
 
@@ -30,7 +30,7 @@ if ($stmt->execute()) {
         $place = htmlspecialchars($val['place']);
         $date = htmlspecialchars($val['date']);
         $count = htmlspecialchars($val['count']);
-        $message = htmlspecialchars($val['message']);
+        $message = nl2br(htmlspecialchars($val['message']));
         if ($sound = htmlspecialchars($val['sound']) == '1') {
             $sound = 'Не будет использоваться';
         } elseif ($sound = htmlspecialchars($val['sound']) == '2') {

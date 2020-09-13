@@ -55,11 +55,8 @@ if (strtolower($_POST['form']) == 'митинг') {
                     $file[1] = str_ireplace('Frm2', strtolower($_POST['form']), $file[1]);
                 }
             }
-
         }
-
     }
-
 }
 
 file_put_contents($filename, $file); # сохраняем изменения в xml'ке
@@ -99,7 +96,7 @@ if (exec($command_done)) {
     $stmt->bindValue(':sound', $_POST['sound'], PDO::PARAM_STR);
 
     if ($stmt->execute()) {
-        echo("<html><br><br><br><link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\" integrity=\"sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm\" crossorigin=\"anonymous\"><center><h2>Документ готов для скачивания</h2><center><br><a href=\"uploads/" . $hash_with_salt . "/xml/1.docx\" class=\"btn btn-primary btn-lg active\" role=\"button\" aria-pressed=\"true\">Скачать</a>"); # Выводим ссылку для скачивания
+        echo("<html><br><br><br><link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\" integrity=\"sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm\" crossorigin=\"anonymous\"><center><h2>Документ готов для скачивания</h2><center><br><a href=\"uploads/" . $hash_with_salt . "/xml/1.docx\" class=\"btn btn-primary btn-lg active\" role=\"button\" aria-pressed=\"true\">Скачать уведомление</a>"); # Выводим ссылку для скачивания
     } else {
         echo 'Ошибка при запросе к БД<br>';
         echo $sql . '<br>';

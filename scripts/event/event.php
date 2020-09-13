@@ -4,50 +4,42 @@
  *
  */
 
-$pageTitle = 'Мероприятие (id: ' . $_GET['id'] . ')';
-$h1Title = 'Мероприятие. Дата проведения 31.12.20 в 23:59:59';
-$pageDesc = 'test';
+$sql = 'SELECT * FROM `requests` WHERE `id`=:id';
+
+$stmt = $db->prepare($sql);
+$stmt->bindValue(':id', (int)$_GET['id'], PDO::PARAM_STR);
+
+if ($stmt->execute()) {
+
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    if (count($rows) > 0) {
+        $id = htmlspecialchars($rows[0]['id']);
+        $fio_org = htmlspecialchars($rows[0]['fio_org']);
+        $tel_org = htmlspecialchars($rows[0]['tel_org']);
+        $format = htmlspecialchars($rows[0]['format']);
+        $place = htmlspecialchars($rows[0]['place']);
+        $date = htmlspecialchars($rows[0]['date']);
+        $count = htmlspecialchars($rows[0]['count']);
+        $message = nl2br(htmlspecialchars($rows[0]['message']));
+        if ($sound = htmlspecialchars($rows[0]['sound']) == '1') {
+            $sound = 'Не будет использоваться';
+        } elseif ($sound = htmlspecialchars($rows[0]['sound']) == '2') {
+            $sound = 'Будет использоваться';
+        }
+        $views = htmlspecialchars($rows[0]['views']);
+        $members = htmlspecialchars($rows[0]['members']);
+        $creation_date = date("d.m.y H:i", strtotime($rows[0]['creation_date']));
+
+        $pageTitle = 'Тип мероприятия: ' . $format . ' (id: ' . (int)$_GET['id'] . ')';
+        $h1Title = 'Тип мероприятия: ' . $format;
+        $subTitle = 'Дата проведения: ' . $date;
+        $pageDesc = '';
+    } else {
+        echo 'Мероприятие с таким id не найдено.';
+    }
+} else {
+    echo 'Ошибка выполнения запроса к БД';
+}
 
 ?>
-
-<div class="col-md-8 col-md-offset-2">
-    <!-- TODO: Сделать установку точки по координатам из БД -->
-    <script type="text/javascript" charset="utf-8" async
-            src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A7f88e7e8c181fff38802f19ee678fd22a85926f5b938752ea3d1b8c075d1d248&amp;width=100%25&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>
-</div>
-<div class="col-md-8 col-md-offset-2">
-    <h3>Описание</h3>
-    Описание мероприятия.<br>
-    Подробное или не очень.
-
-    <h3>Организаторы</h3>
-    МАО "Рога и копыта"
-
-    <h3>Контакты</h3>
-    Иванов Иван Иванович<br>
-    <a href="tel:+70000000000">+7 (000) 000-00-00</a>
-
-    <h3>Статус</h3>
-    <span class="label label-success">Согласовано</span>
-    <span class="label label-warning">В процессе согасования</span>
-    <span class="label label-danger">Не согласовано</span>
-</div>
-<div class="col-md-8 col-md-offset-2">
-<hr>
-</div>
-<div class="col-md-8 col-md-offset-2">
-    <form class="form-inline">
-        <div class="form-group">
-            <span class="help-block">Собираетесь посетить?</span>
-        </div>
-        <br>
-        <div class="form-group">
-            <div class="">
-                <button type="submit" class="btn btn-info">Я пойду!</button>
-            </div>
-        </div>
-    </form>
-</div>
-<div class="col-md-8 col-md-offset-2">
-    <hr>
-</div>
