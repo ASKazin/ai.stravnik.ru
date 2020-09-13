@@ -8,45 +8,53 @@ $pageTitle = 'Информационный ресурс "Свобода собр
 $h1Title = 'Расписание публичных мероприятий';
 $pageDesc = 'test';
 
-?>
+$result = 'SELECT COUNT(id) FROM `requests`';
+$stmt = $db->prepare($result);
+$stmt->execute();
+$requests = $stmt->fetchColumn();
+$subTitle = 'Всего поданных заявок: ' . $requests;
 
-<div class="col-md-4">
-    <div class="panel panel-info">
-        <div class="panel-heading">
-            <a href="/?mode=event&id=1"><h3 class="panel-title">Митинг</h3></a>
-        </div>
-        <div class="panel-body">
-            <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A7f88e7e8c181fff38802f19ee678fd22a85926f5b938752ea3d1b8c075d1d248&amp;width=100%25&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>
-            Текст.
-        </div>
-        <div class="panel-footer"><span class="fl-left"><span class="glyphicon glyphicon-eye-open"
-                                                              aria-hidden="true"></span> 555</span>&nbsp;<span
-                    class="fl-right"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 78</span></div>
-    </div>
-</div>
-<div class="col-md-4">
-    <div class="panel panel-info">
-        <div class="panel-heading">
-            <h3 class="panel-title">Шествие</h3>
-        </div>
-        <div class="panel-body">
-            &nbsp;
-        </div>
-        <div class="panel-footer"><span class="fl-left"><span class="glyphicon glyphicon-eye-open"
-                                                              aria-hidden="true"></span> 555</span>&nbsp;<span
-                    class="fl-right"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 78</span></div>
-    </div>
-</div>
-<div class="col-md-4">
-    <div class="panel panel-info">
-        <div class="panel-heading">
-            <h3 class="panel-title">Шествие</h3>
-        </div>
-        <div class="panel-body">
-            &nbsp;
-        </div>
-        <div class="panel-footer"><span class="fl-left"><span class="glyphicon glyphicon-eye-open"
-                                                              aria-hidden="true"></span> 555</span>&nbsp;<span
-                    class="fl-right"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 78</span></div>
-    </div>
-</div>
+// Запрос на выборку заявок
+$sql = 'SELECT * FROM `requests`';
+$stmt = $db->prepare($sql);
+
+// Выводим контент
+if ($stmt->execute()) {
+    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($rows as $val) {
+        $id = htmlspecialchars($val['id']);
+        $fio_org = htmlspecialchars($val['fio_org']);
+        $tel_org = htmlspecialchars($val['tel_org']);
+        $format = htmlspecialchars($val['format']);
+        $place = htmlspecialchars($val['place']);
+        $date = htmlspecialchars($val['date']);
+        $count = htmlspecialchars($val['count']);
+        $message = htmlspecialchars($val['message']);
+        if ($sound = htmlspecialchars($val['sound']) == '1') {
+            $sound = 'Не будет использоваться';
+        } elseif ($sound = htmlspecialchars($val['sound']) == '2') {
+            $sound = 'Будет использоваться';
+        }
+        $views = htmlspecialchars($val['views']);
+        $members = htmlspecialchars($val['members']);
+        $creation_date = date("d.m.y H:i", strtotime($val['creation_date']));
+        // $update_date=htmlspecialchars($val['update_date']);
+
+        $event .= '<div class="col-md-4">';
+        $event .= '<div class="panel panel-info">';
+        $event .= '<div class="panel-heading">';
+        $event .= '<a href="/?mode=event&id=' . $id . '"><h3 class="panel-title">' . $format . '</h3></a>';
+        $event .= '</div>';
+        $event .= '<div class="panel-body">' . mb_substr($message, 0, 30) . '...</div>';
+        $event .= '<div class="panel-footer"><span class="fl-left">';
+        $event .= '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> ' . $views . ' </span>';
+        $event .= '&nbsp;';
+        $event .= '<span class="fl-right">';
+        $event .= '<span class="glyphicon glyphicon-user" aria-hidden="true"></span> ' . $members . ' </span>';
+        $event .= '</div></div></div>';
+    }
+    echo $event;
+}
+
+?>

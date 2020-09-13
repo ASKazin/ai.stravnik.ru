@@ -68,13 +68,13 @@ $command_done = ('cd uploads/' . $hash_with_salt . '/xml/example_docx_unzip; zip
 
 if (exec($command_done)) {
 
-    //Подключаем конфигурационный файл
+    // Подключаем конфигурационный файл
     include 'config.php';
 
-    //Подключаем скрипт с функциями
+    // Подключаем скрипт с функциями
     include 'func/func.php';
 
-    //подключаем MySQL
+    // Подключаем MySQL
     include 'bd/bd.php';
 
     /* Если все хорошо, пишем данные в базу */
