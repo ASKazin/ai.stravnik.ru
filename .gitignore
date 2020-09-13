@@ -8,9 +8,9 @@
 # Editor-based HTTP Client requests
 /httpRequests/
 # Personal
-/css/
-/fonts/
-/js/
+/css/*
+/fonts/*
+/js/*
 /sql/
 /uploads/*
 !/uploads/readme

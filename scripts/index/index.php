@@ -22,6 +22,8 @@ $stmt = $db->prepare($sql);
 if ($stmt->execute()) {
     $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
+    $event = '<div class="uk-grid-small uk-child-width-1-3@s uk-flex-center uk-text-center" uk-grid>';
+
     foreach ($rows as $val) {
         $id = htmlspecialchars($val['id']);
         $fio_org = htmlspecialchars($val['fio_org']);
@@ -41,19 +43,33 @@ if ($stmt->execute()) {
         $creation_date = date("d.m.y H:i", strtotime($val['creation_date']));
         // $update_date=htmlspecialchars($val['update_date']);
 
-        $event .= '<div class="col-md-4">';
-        $event .= '<div class="panel panel-info">';
-        $event .= '<div class="panel-heading">';
-        $event .= '<a href="/?mode=event&id=' . $id . '"><h3 class="panel-title">' . $format . '</h3></a>';
+//        $event .= '<div class="col-md-4">';
+//        $event .= '<div class="panel panel-info">';
+//        $event .= '<div class="panel-heading">';
+//        $event .= '<a href="/?mode=event&id=' . $id . '"><h3 class="panel-title">' . $format . '</h3></a>';
+//        $event .= '</div>';
+//        $event .= '<div class="panel-body">' . mb_substr($message, 0, 30) . '...</div>';
+//        $event .= '<div class="panel-footer"><span class="fl-left">';
+//        $event .= '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> ' . $views . ' </span>';
+//        $event .= '&nbsp;';
+//        $event .= '<span class="fl-right">';
+//        $event .= '<span class="glyphicon glyphicon-user" aria-hidden="true"></span> ' . $members . ' </span>';
+//        $event .= '</div></div></div>';
+
+        $event .= '<div>';
+        $event .= '<div class="uk-card uk-card-default uk-card-body">';
+        $event .= '<a href="/?mode=event&id=' . $id . '"><h3>' . $format . '</h3></a>';
         $event .= '</div>';
-        $event .= '<div class="panel-body">' . mb_substr($message, 0, 30) . '...</div>';
-        $event .= '<div class="panel-footer"><span class="fl-left">';
+        $event .= '<div>' . mb_substr($message, 0, 30) . '...</div>';
+        $event .= '<div><span class="fl-left">';
         $event .= '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> ' . $views . ' </span>';
         $event .= '&nbsp;';
         $event .= '<span class="fl-right">';
         $event .= '<span class="glyphicon glyphicon-user" aria-hidden="true"></span> ' . $members . ' </span>';
-        $event .= '</div></div></div>';
+        $event .= '</div>';
+        $event .= '</div>';
     }
+    $event .= '</div>';
     echo $event;
 }
 
