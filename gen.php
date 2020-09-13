@@ -64,6 +64,6 @@ file_put_contents($filename,$file); # сохраняем изменения в x
 $command_done = ('cd uploads/'.$hash_with_salt.'/xml/example_docx_unzip; zip ../1.docx -r *'); # собираем docx обратно в папку uploads с названием $hash_and_salt
 exec($command_done); 
 
-echo("Скачать файл: <a href=\"uploads/".$hash_with_salt."/xml/1.docx\">Скачать</a>"); # Выводим ссылку для скачивания
+echo("<html><br><br><br><link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\" integrity=\"sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm\" crossorigin=\"anonymous\"><center><h2>Документ готов для скачивания</h2><center><br><a href=\"uploads/".$hash_with_salt."/xml/1.docx\" class=\"btn btn-primary btn-lg active\" role=\"button\" aria-pressed=\"true\">Скачать</a>"); # Выводим ссылку для скачивания
 
 ?>
