@@ -5,23 +5,24 @@ header('Content-Type: text/html; charset=utf-8');
 function createSalt()
 {
     # Генератор соли для хэша
-    $text = md5(uniqid(rand(), TRUE));
-    return substr($text, 0, 3);
+    $text = hash('sha256',random_bytes(64));
+    return substr($text, 2, 60);
 }
 
-$hash = hash('sha256', $_POST['date'] . $_POST['tel']); # sha256(дата митинга+телефон)
-$salt = createSalt();                                 # соль
-$hash_with_salt = hash('sha256', $salt . $hash);      # sha256(sha256(дата+тел)+соль)
+$hash = hash('sha256', $_POST['date'] . $_POST['tel']); # sha256(дата мероприятия+телефон)
+$salt = createSalt();                                   # соль
+$hash_with_salt = hash('sha256', $salt . $hash);        # sha256(sha256(дата+тел)+соль)
 
 $command_path_a_copy = "mkdir -p uploads/" . $hash_with_salt . "/xml; cp -r example_docx_unzip uploads/" . $hash_with_salt . "/xml/";
-exec($command_path_a_copy);
+exec($command_path_a_copy); # создаём новую директорию и копируем туда разархивированный шаблон уведомления (его будем менять)
 
 $filename = "uploads/" . $hash_with_salt . "/xml/example_docx_unzip/word/document.xml";
 
-/* Открываем xmlку с содержимым docx файла
+/* Открываем xmlку с текстом docx файла-шаблона
    example_docx_unzip - папка, куда разархивирован 'Пример уведомления.docx' */
+
 $file = file($filename);
-// TODO: Сделать рефакторинг имен переменных
+// TODO: Сделать рефакторинг некоторых имён переменных
 $file[1] = str_ireplace('Fff', htmlspecialchars($_POST['Fff'],ENT_QUOTES), $file[1]); # меняем ФИО на введённые фио
 $file[1] = str_ireplace('tel', htmlspecialchars($_POST['tel'],ENT_QUOTES), $file[1]); # Меняем tel на введённый телефон
 $file[1] = str_ireplace('purpose', htmlspecialchars($_POST['purpose'],ENT_QUOTES), $file[1]); # ... и так далее
@@ -37,22 +38,22 @@ if ($_POST['sound'] == '1') {
     $file[1] = str_ireplace('sound', 'без использования', $file[1]);
 }
 
-if (strtolower($_POST['form']) == 'митинг' or $_POST['form']=='Митинг') {
+if (mb_strtolower($_POST['form'],'UTF-8') == 'митинг') {
     $file[1] = str_ireplace('Frm2', 'митинга', $file[1]);
 } else {
-    if (strtolower($_POST['form']) == 'шествие' or $_POST['form']=='Шествие') {
+    if (mb_strtolower($_POST['form'],'UTF-8') == 'шествие') {
         $file[1] = str_ireplace('Frm2', 'шествия', $file[1]);
     } else {
-        if (strtolower($_POST['form']) == 'Пикетирование' or strtolower($_POST['form']) == 'Пикет') {
+        if (mb_strtolower($_POST['form'],'UTF-8') == 'пикетирование' or mb_strtolower($_POST['form'],'UTF-8') == 'пикет') {
             $file[1] = str_ireplace('Frm2', 'пикетирования', $file[1]);
         } else {
-            if (strtolower($_POST['form']) == 'собрание' or $_POST['form']=='Собрание') {
+            if (mb_strtolower($_POST['form'],'UTF-8') == 'собрание') {
                 $file[1] = str_ireplace('Frm2', 'собрания', $file[1]);
             } else {
-                if (strtolower($_POST['form']) == 'демонстрация' or $_POST['form']=='Демонстрация') {
+                if (mb_strtolower($_POST['form'],'UTF-8') == 'демонстрация') {
                     $file[1] = str_ireplace('Frm2', 'демонстрации', $file[1]);
                 } else {
-                    $file[1] = str_ireplace('Frm2', htmlspecialchars(strtolower($_POST['form']),ENT_QUOTES), $file[1]);
+                    $file[1] = str_ireplace('Frm2', htmlspecialchars(mb_strtolower($_POST['form'],'UTF-8'),ENT_QUOTES), $file[1]);
                 }
             }
         }
@@ -61,10 +62,10 @@ if (strtolower($_POST['form']) == 'митинг' or $_POST['form']=='Митин�
 
 file_put_contents($filename, $file); # сохраняем изменения в xml'ке
 
-$command_done = ('cd uploads/' . $hash_with_salt . '/xml/example_docx_unzip; zip ../1.docx -r *'); # собираем docx обратно в папку uploads с названием $hash_and_salt
+$command_done = ('cd uploads/' . $hash_with_salt . '/xml/example_docx_unzip; zip ../1.docx -r *'); # собираем новый docx в папку uploads/$hash_salt/..
 
-$public_var = isset($_POST['public']) ? $_POST['public'] : '';
-$exec_check = exec($command_done);
+$public_var = isset($_POST['public']) ? $_POST['public'] : ''; # Для проверки существования параметра
+$exec_check = exec($command_done); 
 
 if ($exec_check and !empty($public_var)) {
 
