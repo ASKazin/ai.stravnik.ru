@@ -22,13 +22,13 @@ $filename = "uploads/" . $hash_with_salt . "/xml/example_docx_unzip/word/documen
    example_docx_unzip - папка, куда разархивирован 'Пример уведомления.docx' */
 $file = file($filename);
 // TODO: Сделать рефакторинг имен переменных
-$file[1] = str_ireplace('Fff', $_POST['Fff'], $file[1]); # меняем ФИО на введённые фио
-$file[1] = str_ireplace('tel', $_POST['tel'], $file[1]); # Меняем tel на введённый телефон
-$file[1] = str_ireplace('purpose', $_POST['purpose'], $file[1]); # ... и так далее
-$file[1] = str_ireplace('Brrr', $_POST['form'], $file[1]);
-$file[1] = str_ireplace('place', $_POST['place'], $file[1]);
-$file[1] = str_ireplace('date', $_POST['date'], $file[1]);
-$file[1] = str_ireplace('num', $_POST['num'], $file[1]);
+$file[1] = str_ireplace('Fff', htmlspecialchars($_POST['Fff'],ENT_QUOTES), $file[1]); # меняем ФИО на введённые фио
+$file[1] = str_ireplace('tel', htmlspecialchars($_POST['tel'],ENT_QUOTES), $file[1]); # Меняем tel на введённый телефон
+$file[1] = str_ireplace('purpose', htmlspecialchars($_POST['purpose'],ENT_QUOTES), $file[1]); # ... и так далее
+$file[1] = str_ireplace('Brrr', htmlspecialchars($_POST['form'],ENT_QUOTES), $file[1]);
+$file[1] = str_ireplace('place', htmlspecialchars($_POST['place'],ENT_QUOTES), $file[1]);
+$file[1] = str_ireplace('date', htmlspecialchars($_POST['date'],ENT_QUOTES), $file[1]);
+$file[1] = str_ireplace('num', htmlspecialchars($_POST['num'],ENT_QUOTES), $file[1]);
 $file[1] = str_ireplace('Prrr', date("m.d.Y"), $file[1]);
 
 if ($_POST['sound'] == '1') {
@@ -52,7 +52,7 @@ if (strtolower($_POST['form']) == 'митинг' or $_POST['form']=='Митин�
                 if (strtolower($_POST['form']) == 'демонстрация' or $_POST['form']=='Демонстрация') {
                     $file[1] = str_ireplace('Frm2', 'демонстрации', $file[1]);
                 } else {
-                    $file[1] = str_ireplace('Frm2', strtolower($_POST['form']), $file[1]);
+                    $file[1] = str_ireplace('Frm2', htmlspecialchars(strtolower($_POST['form']),ENT_QUOTES), $file[1]);
                 }
             }
         }
