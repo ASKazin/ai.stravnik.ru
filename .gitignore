@@ -11,4 +11,7 @@
 /css/
 /fonts/
 /js/
+/sql/
+/uploads/*
+!/uploads/readme
 config.php

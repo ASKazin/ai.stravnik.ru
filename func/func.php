@@ -63,3 +63,13 @@ function emailValid($email)
         }
     }
 }
+
+function logTelegram($type, $message){
+    $botApiToken = ''; // токен бота
+    $id = isset($_SESSION['userId']) ? ' id - ' . $_SESSION['userId'] . ', ' : '';
+    $data = [
+        'chat_id' => '', // название канала
+        'text' => 'Ошибка при формировании уведомления'
+    ];
+    $resp = file_get_contents("https://api.telegram.org/bot{$botApiToken}/sendMessage?" . http_build_query($data) );
+}

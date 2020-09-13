@@ -12,6 +12,9 @@ header('Content-Type: text/html; charset=UTF8');
 //Включаем буферизацию содержимого
 ob_start();
 
+//Версия системы
+$version = '0.8.3 от 19.09.20';
+
 //Определяем переменную для переключателя
 $mode = isset($_GET['mode']) ? $_GET['mode'] : false;
 $user = isset($_SESSION['user']) ? $_SESSION['user'] : false;
@@ -59,12 +62,6 @@ switch ($mode) {
     case 'event':
         include 'scripts/event/event.php';
         include 'scripts/event/event.html';
-        break;
-
-    // Подключаем обработчик страницы подачи заявки
-    case 'request':
-        include 'scripts/request/request.php';
-        include 'scripts/request/request.html';
         break;
 
     // Подключаем обработчик главной страницы

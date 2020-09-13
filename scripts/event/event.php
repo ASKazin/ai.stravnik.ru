@@ -11,6 +11,7 @@ $pageDesc = 'test';
 ?>
 
 <div class="col-md-8 col-md-offset-2">
+    <!-- TODO: Сделать установку точки по координатам из БД -->
     <script type="text/javascript" charset="utf-8" async
             src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A7f88e7e8c181fff38802f19ee678fd22a85926f5b938752ea3d1b8c075d1d248&amp;width=100%25&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>
 </div>

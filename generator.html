@@ -42,130 +42,136 @@
 
 -->
 
-
 <!DOCTYPE html>
-<html>
- <head>
- <title>Генератор уведомлений</title>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
- <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
- </head>
- <body>
+<html lang="ru">
+<head>
+    <title>Генератор уведомлений</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+</head>
+<body>
 
- <div class="container">
+<div class="container">
 
- <div class="row">
+    <div class="row">
 
- <div class="col-lg-8 col-lg-offset-2">
+        <div class="col-lg-8 col-lg-offset-2">
 
- <h1 class="text-center">Генератор уведомлений</h1>
+            <h1 class="text-center">Генератор уведомлений</h1>
 
- <p class="lead">Заполните поля, чтобы создать документ для уведомления органов власти.</p>
+            <p class="lead">Заполните поля, чтобы создать документ для уведомления органов власти.</p>
+
+            <form id="contact-form" method="post" action="gen.php" role="form">
+
+                <div class="messages"></div>
+
+                <div class="controls">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="form_name">ФИО организатора</label>
+                                <input id="form_name" type="text" name="Fff" class="form-control"
+                                       placeholder="Иван Иванов Иванович" required="required"
+                                       data-error="Вы не ввели ФИО.">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="form_phone">Номер телефона организатора</label>
+                                <input id="form_phone" type="tel" name="tel" class="form-control"
+                                       placeholder="79290001234">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="form_message">Форма публичного мероприятия</label>
+                                <input id="form_message" type="text" name="form" class="form-control"
+                                       placeholder="Пикетирование/Митинг" required="required"
+                                       data-error="Вы не указали форму публичного мероприятия.">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="form_message">Место проведения мероприятия</label>
+                                <input id="form_message" type="text" name="place" class="form-control"
+                                       placeholder="Сквер им. Пушкина" required="required"
+                                       data-error="Вы не ввели место проведения мероприятия">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="form_name">Дата, время начала и окончания мероприятия</label>
+                                <input id="form_name" type="text" name="date" class="form-control"
+                                       placeholder="10 августа 2020 с 18:30 до 19:30 часов" required="required"
+                                       data-error="Вы не ввели дату.">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
 
 
- <form id="contact-form" method="post" action="gen.php" role="form">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="form_message">Предполагаемое количество участников</label>
+                                <input id="form_message" type="text" name="num" class="form-control" placeholder="1500"
+                                       required="required"
+                                       data-error="Вы не ввели предполагаемое количество участников мероприятия.">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+                    </div>
 
- <div class="messages"></div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="form_message">Цель публичного мероприятия</label>
+                                <textarea id="form_message" name="purpose" class="form-control"
+                                          placeholder="Привлечь внимание к ограничению гражданских свобод" rows="5"
+                                          required="required" data-error="Вы не указали цель мероприятия."></textarea>
+                                <div class="help-block with-errors"></div>
 
- <div class="controls">
+                                <label for="form_message">Звукоусиливающая аппаратура</label>
+                                <div class="custom-control custom-radio custom-control-inline">
+                                    <select class="custom-select" name="sound">
+                                        <option value="1">Не будет использоваться</option>
+                                        <option value="2">Будет использоваться</option>
+                                    </select>
 
- <div class="row">
- <div class="col-md-6">
- <div class="form-group">
- <label for="form_name">ФИО организатора</label>
- <input id="form_name" type="text" name="Fff" class="form-control" placeholder="Иван Иванов Иванович" required="required" data-error="Вы не ввели ФИО.">
- <div class="help-block with-errors"></div>
- </div>
- </div>
+                                </div>
+                            </div>
 
-  <div class="col-md-6">
- <div class="form-group">
- <label for="form_phone">Номер телефона организатора</label>
- <input id="form_phone" type="tel" name="tel" class="form-control" placeholder="79290001234">
- <div class="help-block with-errors"></div>
- </div>
- </div>
- </div>
+                            <div class="col-md-12">
+                                <input type="submit" class="btn btn-success btn-send" value="Send message">
+                            </div>
 
- <div class="row">
+                        </div>
 
- <div class="col-md-6">
- <div class="form-group">
- <label for="for_message">Форма публичного мероприятия</label>
- <input id="form_message" type="text" name="form" class="form-control" placeholder="Пикетирование/Митинг" required="required" data-error="Вы не указали форму публичного мероприятия.">
- <div class="help-block with-errors"></div>
- </div>
- </div>
+                    </div>
 
- <div class="col-md-6">
- <div class="form-group">
- <label for="form_message">Место проведения мероприятия</label>
- <input id="form_message" type="text" name="place" class="form-control" placeholder="Сквер им. Пушкина" required="required" data-error="Вы не ввели место проведения мероприятия">
- <div class="help-block with-errors"></div>
- </div>
- </div>
- </div>
+            </form>
 
-<div class="row">
- <div class="col-md-6">
- <div class="form-group">
- <label for="form_name">Дата, время начала и окончания мероприятия</label>
- <input id="form_name" type="text" name="date" class="form-control" placeholder="10 августа 2020 с 18:30 до 19:30 часов" required="required" data-error="Вы не ввели дату.">
- <div class="help-block with-errors"></div>
- </div>
- </div>
+        </div><!-- /.col-lg-8 col-lg-offset-2 -->
 
+    </div> <!-- /.row-->
 
- <div class="col-md-6">
- <div class="form-group">
- <label for="form_message">Предполагаемое количество участников</label>
- <input id="form_message" type="text" name="num" class="form-control" placeholder="1500" required="required" data-error="Вы не ввели предполагаемое количество участников мероприятия.">
- <div class="help-block with-errors"></div>
- </div>
- </div>
- </div>
+</div> <!-- /.container-->
 
- <div class="row">
- <div class="col-md-12">
- <div class="form-group">
- <label for="form_message">Цель публичного мероприятия</label>
- <textarea id="form_message" name="purpose" class="form-control" placeholder="Привлечь внимание к ограничению гражданских свобод" rows="1" required="required" data-error="Вы не указали цель мероприятия."></textarea>
- <div class="help-block with-errors"></div>
-
-  <label for="form_message">Звукоусиливающая аппаратура</label>
- <div class="custom-control custom-radio custom-control-inline">
-  <select class="custom-select">
-  <option value="1">Не будет использоваться</option>
-  <option value="2">Будет использоваться</option>
-</select>
-
- </div>
- </div>
-
- <div class="col-md-12">
- <div class="form-group">
- </div>
- </div>
-
- <div class="col-md-12">
- <input type="submit" class="btn btn-success btn-send" value="Send message">
- </div>
-
- </div>
-
- </div>
-
- </form>
-
- </div><!-- /.col-lg-8 col-lg-offset-2 -->
-
- </div> <!-- /.row-->
-
- </div> <!-- /.container-->
-
- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
- </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
 </html>
