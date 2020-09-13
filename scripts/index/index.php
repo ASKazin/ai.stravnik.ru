@@ -59,8 +59,7 @@ if ($stmt->execute()) {
         $event .= '<div>';
         $event .= '<div class="uk-card uk-card-default uk-card-body">';
         $event .= '<a class="uk-link-reset" href="/?mode=event&id=' . $id . '"><h4 class="uk-article-title">' . $format . '</h4></a>';
-        $event .= '';
-        $event .= '<p class="uk-text-lead">' . mb_substr($message, 0, 40) . '...</p>';
+        $event .= '<p class="uk-text-lead">' . mb_substr($message, 0, 50) . '...</p>';
         $event .= '<span class="fl-left uk-article-meta">';
         $event .= '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span> ' . $views . ' </span>';
         $event .= '&nbsp;';
