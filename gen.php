@@ -37,19 +37,19 @@ if ($_POST['sound'] == '1') {
     $file[1] = str_ireplace('sound', 'без использования', $file[1]);
 }
 
-if (strtolower($_POST['form']) == 'митинг') {
+if (strtolower($_POST['form']) == 'митинг' or $_POST['form']=='Митинг') {
     $file[1] = str_ireplace('Frm2', 'митинга', $file[1]);
 } else {
-    if (strtolower($_POST['form']) == 'шествие') {
+    if (strtolower($_POST['form']) == 'шествие' or $_POST['form']=='Шествие') {
         $file[1] = str_ireplace('Frm2', 'шествия', $file[1]);
     } else {
-        if (strtolower($_POST['form']) == 'пикетирование' or strtolower($_POST['form']) == 'пикет') {
+        if (strtolower($_POST['form']) == 'Пикетирование' or strtolower($_POST['form']) == 'Пикет') {
             $file[1] = str_ireplace('Frm2', 'пикетирования', $file[1]);
         } else {
-            if (strtolower($_POST['form']) == 'собрание') {
+            if (strtolower($_POST['form']) == 'собрание' or $_POST['form']=='Собрание') {
                 $file[1] = str_ireplace('Frm2', 'собрания', $file[1]);
             } else {
-                if (strtolower($_POST['form']) == 'демонстрация') {
+                if (strtolower($_POST['form']) == 'демонстрация' or $_POST['form']=='Демонстрация') {
                     $file[1] = str_ireplace('Frm2', 'демонстрации', $file[1]);
                 } else {
                     $file[1] = str_ireplace('Frm2', strtolower($_POST['form']), $file[1]);
