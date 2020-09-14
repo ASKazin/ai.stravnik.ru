@@ -41,7 +41,7 @@
 						<div class="form-group">
 						<label for="form_phone">Номер телефона <button type="button" data-toggle="modal" data-target="#modal_who-org">организатора</button>
 						</label>
-						<input id="form_phone" type="text" name="tel" class="form-control" placeholder="79290001234">
+						<input required="required" id="form_phone" type="text" name="tel" class="form-control" placeholder="79290001234">
                         <div class="help-block with-errors"></div>
                         </div>
                     </div>
@@ -70,9 +70,9 @@
                         <div class="col-md-6">
                             <div class="form-group">
                             	<label for="form_name">Дата, <button type="button" data-toggle="modal" data-target="#modal_time">время</button> начала и окончания мероприятия</label>
-                                    <p class="floated2"><input onchange="change_time_end()" id="datetime_id" class="form-control" type="datetime-local" name="datetime_start">
+                                    <p class="floated2"><input required="required" onchange="change_time_end()" id="datetime_id" class="form-control" type="datetime-local" name="datetime_start">
                                     </p>
-									<p class="floated"><input id="time_id" class="form-control" value="20:00" type="time" name="time_end"></p>
+									<p class="floated"><input required="required" id="time_id" class="form-control" value="20:00" type="time" name="time_end"></p>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
