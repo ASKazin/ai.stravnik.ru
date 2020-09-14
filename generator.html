@@ -1,47 +1,3 @@
-<!-- 
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<title>Генератор уведомления на митинг</title>
-</head>
-<body><br>
-
-<form action="gen.php" method="post">
-
-<b>ФИО организатора <br></b>
-<input type="text" placeholder="Иван Иванов Иванович" name="Fff"><br><br>
-
-<b>Телефон организатора <br></b>
-<input type="text" placeholder="79290001234" name="tel"><br><br>
-
-<b>Цель мероприятия <br></b>
-<input type="text" placeholder="Привлечь внимание к ограничению гражданских свобод" name="purpose" size=53><br><br>
-
-<b>Форма публичного мероприятия <br></b>
-<input type="text" placeholder="Пикетирование" name="form"><br><br>
-
-<b>Место проведения мероприятия <br></b>
-<input type="text" placeholder="Сквер Пушкина" name="place"><br><br>
-
-<b>Дата, время начала и окончания публичного мероприятия<br></b>
-<input type="text" placeholder="10 августа 2020 с 18:30 до 19:30 часов" name="date" size=36><br><br>
-
-<b>Предполагаемое количество участников публичного мероприятия<br></b>
-<input type="text" placeholder="1500" name="num"><br><br>
-
-<b>Звукоусиливающая аппаратура</b><br>
-<select name="sound">
-  <option value="1">Будет использоваться</option>
-  <option value="0">Не будет использоваться</option>
-</select><br><br>
-
-<p><input type="submit" value="Отправить"></p>
-
-</form>
-
--->
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -73,19 +29,28 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="form_name">ФИО<button type="button" data-toggle="modal" data-target="#myModal">организатора</button></label>
+                                <label for="form_name">ФИО<button type="button" data-toggle="modal" data-target="#modal_who-org">организатора</button></label>
                                 <input id="form_name" type="text" name="Fff" class="form-control"
                                        placeholder="Иван Иванов Иванович" required="required"
                                        data-error="Вы не ввели ФИО.">
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
+					
+					<div class="col-md-6">
+						<div class="form-group">
+						<label for="form_phone">Номер телефона <button type="button" data-toggle="modal" data-target="#modal_who-org">организатора</button>
+						</label>
+						<input id="form_phone" type="text" name="tel" class="form-control" placeholder="79290001234">
+                        <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="form_phone">Номер телефона <button type="" data-toggle="modal" data-target="#myModal">организатора</button></label>
-                                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
+                    </div>
+
+
+			<div class="modal fade" id="modal_who-org" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		<div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -96,87 +61,23 @@
         Вы не можете организовать митинг, если cуд признал вас недееспособным, вы сидите в тюрьме или имеете непогашенную судимость за преступление против конституционного строя, либо если вас два и более раз привлекали к ответственности по административным статьям за нарушение правил проведения акций.
       </div>
     </div>
-  </div>
-</div>
-                                <input id="form_phone" type="text" name="tel" class="form-control"
-                                       placeholder="79290001234">
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
-                    </div>
+  		</div>
+			</div>
+
 
                     <div class="row">
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="form_message"><button type="" data-toggle="modal" data-target="#myModal2">Форма</button> публичного мероприятия</label>
-                                <input id="form_message" type="text" name="form" class="form-control"
-                                       placeholder="Пикетирование/Митинг" required="required"
-                                       data-error="Вы не указали форму публичного мероприятия.">
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
-<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Какие есть формы публичного мероприятия?</h4>
-      </div>
-      <div class="modal-body">
-        СОБРАНИЕ — граждане собираются в специальном месте, чтобы обсудить общественно значимые вопросы.<br>МИТИНГ — граждане массово собираются, чтобы публично выразить мнение.<br>ДЕМОНСТРАЦИЯ — граждане массово идут или едут на машинах, иногда с плакатами, чтобы публично выразить мнение.<br>ШЕСТВИЕ — граждане идут по маршруту, чтобы привлечь внимание к проблеме.<br>ПИКЕТ — граждане собираются и стоят у объекта пикетирования, с плакатами, но без звуковой аппаратуры.<br>
-      </div>
-    </div>
-  </div>
-</div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="form_message"><button type="" data-toggle="modal" data-target="#myModal3">Место</button> проведения мероприятия</label>
-                                <input id="form_message" type="text" name="place" class="form-control"
-                                       placeholder="Сквер им. Пушкина" required="required"
-                                       data-error="Вы не ввели место проведения мероприятия">
-                                <div class="help-block with-errors"></div>
-                            </div>
-                        </div>
-                    </div>
-
-<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Где нельзя митинговать?</h4>
-      </div>
-      <div class="modal-body">      
-— рядом с опасными производствами;
-<br>
-— у путепроводов и железнодорожных магистралей;
-<br>
-— у нефте-, газо- и продуктопроводов, линий электропередач;
-<br>
-— около резиденций президента;
-<br>
-— у судов, колоний, СИЗО;
-<br>
-— в пограничной зоне, если нет разрешения от пограничных органов.
-<br>
-Возле религиозных объектов запрещено проводить публичные мероприятия, размещать тексты и изображения, которые могут оскорбить чьи-то религиозные чувства.
-      </div>
-    </div>
-  </div>
-</div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="form_name">Дата, <button type="" data-toggle="modal" data-target="#myModal4">время</button> начала и окончания мероприятия</label>
-                                <input id="form_name" type="text" name="date" class="form-control"
-                                       placeholder="10 августа 2020 с 18:30 до 19:30 часов" required="required"
-                                       data-error="Вы не ввели дату.">
+                            	<label for="form_name">Дата, <button type="" data-toggle="modal" data-target="#modal_time">время</button> начала и окончания мероприятия</label>
+                                    <p class="floated2"><input class="form-control" type="datetime-local" name="datetime_start"></p>
+									<p class="floated"><input class="form-control" type="time" name="time_end"></p>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
 
-<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+<div class="modal fade" id="modal_time" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -184,7 +85,7 @@
         <h4 class="modal-title" id="myModalLabel">Когда можно митинговать?</h4>
       </div>
       <div class="modal-body">      
-Мероприятия, кроме культурных и памятных, можно проводить с 7 до 22 часов.<br>Если несколько организаторов хотят использовать площадку в одно и то же время, разрешат тому, кто раньше подал уведомление.
+		Мероприятия, кроме культурных и памятных, можно проводить с 7 до 22 часов.<br>Если несколько организаторов хотят использовать площадку в одно и то же время, разрешат тому, кто раньше подал уведомление.
       </div>
     </div>
   </div>
@@ -192,16 +93,91 @@
 
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="form_message">Предполагаемое <button type="" data-toggle="modal" data-target="#myModal5">количество</button>  участников</label>
+                            	<label for="form_message"><button type="button" data-toggle="modal" data-target="#modal_form">Форма</button> публичного мероприятия</label>
+                            	<div class="custom-control custom-radio custom-control-inline">
+                                    <select class="select-css" name="form">
+                                        <option value="собрание">Собрание</option>
+                                        <option value="митинг">Митинг</option>
+                                        <option value="пикетирование">Пикетирование</option>
+                                        <option value="демонстрация">Демонстрация</option>
+                                        <option value="шествие">Шествие</option>
+                                    </select>
+                                </div>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+<div class="modal fade" id="modal_form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Какие есть формы публичного мероприятия?</h4>
+      </div>
+      <div class="modal-body">
+        Собрание — граждане собираются в специальном месте, чтобы обсудить общественно значимые вопросы.<br>Митинг — граждане массово собираются, чтобы публично выразить мнение.<br>Демонстрация — граждане массово идут или едут на машинах, иногда с плакатами, чтобы публично выразить мнение.<br>Шествие — граждане идут по маршруту, чтобы привлечь внимание к проблеме.<br>Пикет — граждане собираются и стоят у объекта пикетирования, с плакатами, но без звуковой аппаратуры.<br>
+      </div>
+    </div>
+  </div>
+</div>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                            	<label for="form_message"><button type="button" data-toggle="modal" data-target="#modal_place">Место</button> проведения мероприятия</label>
+                                <input id="form_name" type="text" placeholder="Сквер им. Пушкина" name="place" class="form-control" required="required" data-error="Вы не ввели дату.">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+
+
+
+<div class="modal fade" id="modal_place" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Где нельзя митинговать?</h4>
+      </div>
+      <div class="modal-body">      
+		Нельзя митинговать:
+		<br>
+		— рядом с опасными производствами;
+		<br>
+		— у путепроводов и железнодорожных магистралей;
+		<br>
+		— у нефте-, газо- и продуктопроводов, линий электропередач;
+		<br>
+		— около резиденций президента;
+		<br>
+		— у судов, колоний, СИЗО;
+		<br>
+		— в пограничной зоне, если нет разрешения от пограничных органов.
+		<br>
+		Возле религиозных объектов запрещено проводить публичные мероприятия, размещать тексты и изображения, которые могут оскорбить чьи-то религиозные чувства.
+      </div>
+    </div>
+  </div>
+</div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="form_message">Предполагаемое <button type="" data-toggle="modal" data-target="#modal_count">количество</button>  участников</label>
                                 <input id="form_message" type="text" name="num" class="form-control" placeholder="1500"
                                        required="required"
                                        data-error="Вы не ввели предполагаемое количество участников мероприятия.">
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
+
                     </div>
 
-<div class="modal fade" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+<div class="modal fade" id="modal_count" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -215,7 +191,9 @@
 </div>
 
                     <div class="row">
+
                         <div class="col-md-12">
+
                             <div class="form-group">
                                 <label for="form_message">Цель публичного мероприятия</label>
                                 <textarea id="form_message" name="purpose" class="form-control"
@@ -229,30 +207,28 @@
                                         <option value="0">Не будет использоваться</option>
                                         <option value="1">Будет использоваться</option>
                                     </select>
-
                                 </div>
                             </div>
-				
-				<div class="row">
+
+			<div class="row">
                 <div class="col-md-12">
                     <input type="checkbox" class="filled-in checkcheck" checked id="PersonalDataAgree" required />
                     <label for="PersonalDataAgree" style="margin-top:30px;margin-bottom:-30px;"></label>
                     <input type="text" name="PersonalDataAgree" value="true" data-val="true" data-val-required="Требуется соглашение на обработку персональных данных" style="position:absolute;left:-999999px;" />
-                    
+
                     <span>Я <a target="_blank" href="/?mode=legal">согласен</a> на обработку моих персональных данных</span>
                 </div>
             </div>
 				
-   				<div class="row">
+			<div class="row">
                 <div class="col-md-12">
                     <input type="checkbox" class="filled-in checkcheck" checked id="public" name="public" value="true"/>
                     <label for="public" style="margin-top:30px;margin-bottom:-30px;"></label>
-                    
                     <span>Опубликовать заявку на главной странице</span>
                 </div>
             </div><br>
-				
-                            <!-- TODO: Добавить поле для загрузки изображения -->
+
+                            <!-- TODO: Добавить поле для загрузки изображения --> <!-- TODO 2: Какого изображения? -->
                             <div class="col-md-12">
                                 <input type="submit" class="btn btn-success btn-send" value="Создать">
 			    	<p align="right" class="floated"><a class="btn btn-success btn-send" href="/">Вернуться</a></p>
@@ -272,5 +248,6 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </body>
 </html>
