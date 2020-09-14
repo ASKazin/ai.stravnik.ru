@@ -38,22 +38,22 @@ if ($_POST['sound'] == '1') {
     $file[1] = str_ireplace('sound', 'без использования', $file[1]);
 }
 
-if (mb_strtolower($_POST['form'],'UTF-8') == 'митинг') {
+if ($_POST['form'] == 'митинг') {
     $file[1] = str_ireplace('Frm2', 'митинга', $file[1]);
 } else {
-    if (mb_strtolower($_POST['form'],'UTF-8') == 'шествие') {
+    if ($_POST['form'] == 'шествие') {
         $file[1] = str_ireplace('Frm2', 'шествия', $file[1]);
     } else {
-        if (mb_strtolower($_POST['form'],'UTF-8') == 'пикетирование' or mb_strtolower($_POST['form'],'UTF-8') == 'пикет') {
+        if ($_POST['form'] == 'пикетирование') {
             $file[1] = str_ireplace('Frm2', 'пикетирования', $file[1]);
         } else {
-            if (mb_strtolower($_POST['form'],'UTF-8') == 'собрание') {
+            if ($_POST['form'] == 'собрание') {
                 $file[1] = str_ireplace('Frm2', 'собрания', $file[1]);
             } else {
-                if (mb_strtolower($_POST['form'],'UTF-8') == 'демонстрация') {
+                if ($_POST['form'] == 'демонстрация') {
                     $file[1] = str_ireplace('Frm2', 'демонстрации', $file[1]);
                 } else {
-                    $file[1] = str_ireplace('Frm2', htmlspecialchars(mb_strtolower($_POST['form'],'UTF-8'),ENT_QUOTES), $file[1]);
+                    $file[1] = str_ireplace('Frm2', 'Invalid data', $file[1]);
                 }
             }
         }
