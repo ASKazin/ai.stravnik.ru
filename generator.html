@@ -70,14 +70,15 @@
                         <div class="col-md-6">
                             <div class="form-group">
                             	<label for="form_name">Дата, <button type="button" data-toggle="modal" data-target="#modal_time">время</button> начала и окончания мероприятия</label>
-                                    <p class="floated2"><input id="datetime_id" class="form-control" type="datetime-local" name="datetime_start"></p>
-									<p class="floated"><input class="form-control" type="time" name="time_end"></p>
+                                    <p class="floated2"><input onchange="change_time_end()" id="datetime_id" class="form-control" type="datetime-local" name="datetime_start">
+                                    </p>
+									<p class="floated"><input id="time_id" class="form-control" value="20:00" type="time" name="time_end"></p>
                                 <div class="help-block with-errors"></div>
                             </div>
                         </div>
 
 <script type="text/javascript">
-	// Установка минимального дня для выбора даты мероприятия на сегодняшний
+	// Установка минимального дня для выбора даты мероприятия на текущий день
 	var today = new Date();
 	var dd = String(today.getDate()).padStart(2, '0');
 	var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -85,8 +86,15 @@
 
 	today = yyyy + '-' + mm + '-' + dd + "T06:00:00.00";
 	var tag = document.getElementById('datetime_id').setAttribute("min",today);
-</script>
 
+
+	// Установка минимального времени для выбора даты мероприятия на выбранное началом
+	function change_time_end() {
+		document.getElementById('time_id').setAttribute('min',(document.getElementById('datetime_id').value.slice(11, 16)));
+		document.getElementById('time_id').setAttribute('max','22:00');
+	}
+
+</script>
 
 <div class="modal fade" id="modal_time" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
