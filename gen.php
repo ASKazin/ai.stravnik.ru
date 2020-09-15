@@ -24,14 +24,15 @@ $filename = "uploads/" . $hash_with_salt . "/xml/example_docx_unzip/word/documen
 $file = file($filename);
 // TODO: Сделать рефакторинг некоторых имён переменных
 
-if(((strlen($_POST['Fff'])+strlen($_POST['tel'])+strlen($_POST['form'])+strlen($_POST['date'])+strlen($_POST['num'])+strlen('place')) < 300) and (!isset($_POST['purpose'][5000]))) { 
+if(((strlen($_POST['Fff'])+strlen($_POST['tel'])+strlen($_POST['form'])+strlen($_POST['valid_timestart'])+strlen($_POST['time_end'])+strlen($_POST['num'])+strlen('place')) < 300) and (!isset($_POST['purpose'][5000]))) { 
     // Проверка на размер входных данных
     $file[1] = str_ireplace('Fff', htmlspecialchars($_POST['Fff'],ENT_QUOTES|ENT_XML1), $file[1]); # меняем ФИО на введённые фио
     $file[1] = str_ireplace('tel', htmlspecialchars($_POST['tel'],ENT_QUOTES|ENT_XML1), $file[1]); # Меняем tel на введённый телефон
     $file[1] = str_ireplace('purpose', htmlspecialchars($_POST['purpose'],ENT_QUOTES|ENT_XML1), $file[1]); # ... и так далее
     $file[1] = str_ireplace('Brrr', htmlspecialchars($_POST['form'],ENT_QUOTES|ENT_XML1), $file[1]);
     $file[1] = str_ireplace('place', htmlspecialchars($_POST['place'],ENT_QUOTES|ENT_XML1), $file[1]);
-    $file[1] = str_ireplace('date', htmlspecialchars($_POST['date'],ENT_QUOTES|ENT_XML1), $file[1]);
+    $date_var = $_POST['valid_timestart'].' '.$_POST['time_end'];
+    $file[1] = str_ireplace('date', htmlspecialchars($date_var,ENT_QUOTES|ENT_XML1), $file[1]);
     $file[1] = str_ireplace('num', htmlspecialchars($_POST['num'],ENT_QUOTES|ENT_XML1), $file[1]);
     $file[1] = str_ireplace('Prrr', date("m.d.Y"), $file[1]);
 } else {
@@ -107,7 +108,7 @@ if ($exec_check and !empty($public_var)) {
     $stmt->bindValue(':tel_org', $_POST['tel'], PDO::PARAM_STR);
     $stmt->bindValue(':format', $_POST['form'], PDO::PARAM_STR);
     $stmt->bindValue(':place', $_POST['place'], PDO::PARAM_STR);
-    $stmt->bindValue(':date', $_POST['date'], PDO::PARAM_STR);
+    $stmt->bindValue(':date', $date_var, PDO::PARAM_STR);
     $stmt->bindValue(':count', $_POST['num'], PDO::PARAM_STR);
     $stmt->bindValue(':message', $_POST['purpose'], PDO::PARAM_STR);
     $stmt->bindValue(':sound', $_POST['sound'], PDO::PARAM_STR);
