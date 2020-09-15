@@ -114,7 +114,7 @@
                             <div class="form-group">
                             	<label for="form_message"><button type="button" data-toggle="modal" data-target="#modal_form">Форма</button> публичного мероприятия</label>
                             	<div class="custom-control custom-radio custom-control-inline">
-                                    <select class="select-css" name="form">
+                                    <select onchange="form_id_check()" id="form_id" class="select-css" name="form">
                                         <option value="собрание">Собрание</option>
                                         <option value="митинг">Митинг</option>
                                         <option value="пикетирование">Пикетирование</option>
@@ -128,6 +128,18 @@
 
                     </div>
 
+<script type="text/javascript">
+	function form_id_check() {
+		var sel = document.getElementById('form_id').value;
+
+		if(sel=='пикетирование'){
+			document.getElementById('sound_id').setAttribute('hidden','true');
+		} else {
+			document.getElementById('sound_id').removeAttribute('hidden');
+		}
+	}
+
+</script>
 
 <div class="modal fade" id="modal_form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
@@ -219,12 +231,13 @@
                                           required="required" data-error="Вы не указали цель мероприятия."></textarea>
                                 <div class="help-block with-errors"></div>
 
+                                <div id="sound_id">
                                 <label for="form_message">Звукоусиливающая аппаратура</label>
                                 <div class="custom-control custom-radio custom-control-inline">
                                     <select class="select-css" name="sound">
                                         <option value="0">Не будет использоваться</option>
                                         <option value="1">Будет использоваться</option>
-                                    </select>
+                                    </select> </div>
                                 </div>
                             </div>
 
