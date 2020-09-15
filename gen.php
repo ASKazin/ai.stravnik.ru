@@ -23,14 +23,27 @@ $filename = "uploads/" . $hash_with_salt . "/xml/example_docx_unzip/word/documen
 
 $file = file($filename);
 // TODO: Сделать рефакторинг некоторых имён переменных
-$file[1] = str_ireplace('Fff', htmlspecialchars($_POST['Fff'],ENT_QUOTES), $file[1]); # меняем ФИО на введённые фио
-$file[1] = str_ireplace('tel', htmlspecialchars($_POST['tel'],ENT_QUOTES), $file[1]); # Меняем tel на введённый телефон
-$file[1] = str_ireplace('purpose', htmlspecialchars($_POST['purpose'],ENT_QUOTES), $file[1]); # ... и так далее
-$file[1] = str_ireplace('Brrr', htmlspecialchars($_POST['form'],ENT_QUOTES), $file[1]);
-$file[1] = str_ireplace('place', htmlspecialchars($_POST['place'],ENT_QUOTES), $file[1]);
-$file[1] = str_ireplace('date', htmlspecialchars($_POST['date'],ENT_QUOTES), $file[1]);
-$file[1] = str_ireplace('num', htmlspecialchars($_POST['num'],ENT_QUOTES), $file[1]);
-$file[1] = str_ireplace('Prrr', date("m.d.Y"), $file[1]);
+
+if(((strlen($_POST['Fff'])+strlen($_POST['tel'])+strlen($_POST['form'])+strlen($_POST['date'])+strlen($_POST['num'])+strlen('place')) < 300) and (!isset($_POST['purpose'][5000]))) { 
+    // Проверка на размер входных данных
+    $file[1] = str_ireplace('Fff', htmlspecialchars($_POST['Fff'],ENT_QUOTES|ENT_XML1), $file[1]); # меняем ФИО на введённые фио
+    $file[1] = str_ireplace('tel', htmlspecialchars($_POST['tel'],ENT_QUOTES|ENT_XML1), $file[1]); # Меняем tel на введённый телефон
+    $file[1] = str_ireplace('purpose', htmlspecialchars($_POST['purpose'],ENT_QUOTES|ENT_XML1), $file[1]); # ... и так далее
+    $file[1] = str_ireplace('Brrr', htmlspecialchars($_POST['form'],ENT_QUOTES|ENT_XML1), $file[1]);
+    $file[1] = str_ireplace('place', htmlspecialchars($_POST['place'],ENT_QUOTES|ENT_XML1), $file[1]);
+    $file[1] = str_ireplace('date', htmlspecialchars($_POST['date'],ENT_QUOTES|ENT_XML1), $file[1]);
+    $file[1] = str_ireplace('num', htmlspecialchars($_POST['num'],ENT_QUOTES|ENT_XML1), $file[1]);
+    $file[1] = str_ireplace('Prrr', date("m.d.Y"), $file[1]);
+} else {
+    $file[1] = str_ireplace('Fff', 'Too large data', $file[1]); # меняем ФИО на введённые фио
+    $file[1] = str_ireplace('tel', 'Too large data', $file[1]); # Меняем tel на введённый телефон
+    $file[1] = str_ireplace('purpose', 'Too large data', $file[1]); # ... и так далее
+    $file[1] = str_ireplace('Brrr', 'Too large data', $file[1]);
+    $file[1] = str_ireplace('place', 'Too large data', $file[1]);
+    $file[1] = str_ireplace('date', 'Too large data', $file[1]);
+    $file[1] = str_ireplace('num', 'Too large data', $file[1]);
+    $file[1] = str_ireplace('Prrr', date("m.d.Y"), $file[1]);
+}
 
 if ($_POST['sound'] == '1') {
     $file[1] = str_ireplace('sound', 'с использованием', $file[1]);
@@ -53,7 +66,7 @@ if ($_POST['form'] == 'митинг') {
                 if ($_POST['form'] == 'демонстрация') {
                     $file[1] = str_ireplace('Frm2', 'демонстрации', $file[1]);
                 } else {
-                    $file[1] = str_ireplace('Frm2', 'Invalid data', $file[1]);
+                    $file[1] = str_ireplace('Frm2', 'Incorrect data', $file[1]);
                 }
             }
         }
