@@ -79,14 +79,17 @@
 
 <script type="text/javascript">
 	// Установка минимального дня для выбора даты мероприятия на текущий день
+	date_update(3);
+
+	function date_update(n) {
 	var today = new Date();
-	var dd = String(today.getDate()+3).padStart(2, '0');
+	var dd = String(today.getDate()+n).padStart(2, '0');
 	var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 	var yyyy = today.getFullYear();
 
 	today = yyyy + '-' + mm + '-' + dd + "T06:00:00.00";
 	var tag = document.getElementById('datetime_id').setAttribute("min",today);
-
+	}
 
 	// Установка минимального времени для выбора даты мероприятия на выбранное началом
 	function change_time_end() {
@@ -134,8 +137,10 @@
 
 		if(sel=='пикетирование'){
 			document.getElementById('sound_id').setAttribute('hidden','true');
+			date_update(3);
 		} else {
 			document.getElementById('sound_id').removeAttribute('hidden');
+			date_update(10);
 		}
 	}
 
