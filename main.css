@@ -50,3 +50,10 @@ input[type=text]:focus {
   float:right;
   margin-right:5px;
 }
+
+
+.floated2 {
+  float:left;
+  margin-left:5px;
+}
+
