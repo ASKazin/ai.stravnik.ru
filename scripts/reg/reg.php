@@ -124,13 +124,13 @@ if (isset($_POST['submit'])) {
             else {
 
                 // Получаем ХЕШ соли
-                //$salt = salt();
+                $salt = substr(hash('sha256',random_bytes(64)), 2, 60)
 
                 // Солим пароль
-                $pass = hash('sha256',$_POST['pass'].substr(hash('sha256',random_bytes(64)), 2, 60));
+                $pass = hash('sha256',$_POST['pass'].$salt);
 
                 /* Если все хорошо, пишем данные в базу */
-                $sql = 'INSERT INTO `users` SET `u_login` = :email,`u_password` = :pass,`u_position` = 0,`u_status` = 0'; // внесены изменения
+                $sql = 'INSERT INTO `users` SET `salt` = :salt,`u_login` = :email,`u_password` = :pass,`u_position` = 0,`u_status` = 0'; // внесены изменения
                 // Подготавливаем PDO выражение для SQL запроса
                 $stmt = $db->prepare($sql);
                 $stmt->bindValue(':email', $_POST['email'], PDO::PARAM_STR);
