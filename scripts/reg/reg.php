@@ -124,7 +124,7 @@ if (isset($_POST['submit'])) {
             else {
 
                 // Получаем ХЕШ соли
-                $salt = substr(hash('sha256',random_bytes(64)), 2, 60)
+                $salt = substr(hash('sha256',random_bytes(64)), 2, 60);
 
                 // Солим пароль
                 $pass = hash('sha256',$_POST['pass'].$salt);
