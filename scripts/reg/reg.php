@@ -127,7 +127,7 @@ if (isset($_POST['submit'])) {
                 //$salt = salt();
 
                 // Солим пароль
-                $pass = md5($_POST['pass']);
+                $pass = hash('sha256',$_POST['pass'].substr(hash('sha256',random_bytes(64)), 2, 60));
 
                 /* Если все хорошо, пишем данные в базу */
                 $sql = 'INSERT INTO `users` SET `u_login` = :email,`u_password` = :pass,`u_position` = 0,`u_status` = 0'; // внесены изменения
