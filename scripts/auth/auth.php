@@ -17,7 +17,7 @@ if (isset($_GET['exit']) == true) {
         header('Location:' . BEZ_HOST . '?mode=auth');
         exit;
     } else {
-        echo "exit error.";
+        echo "Ошибка удаления сессии.";
     }
 }
 if ($user === FALSE) {

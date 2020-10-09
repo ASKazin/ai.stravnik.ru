@@ -19,9 +19,7 @@ if (isset($_GET['active']) and $_GET['active'] == 'ok')
 // Производим активацию аккаунта
 if (isset($_GET['key'])) {
     // Проверяем ключ
-    $sql = 'SELECT *
-			FROM `users`
-			WHERE `u_login` = :key';          // внесено изменение
+    $sql = 'SELECT * FROM `users` WHERE `u_login` = :key';
     // Подготавливаем PDO выражение для SQL запроса
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':key', $_GET['key'], PDO::PARAM_STR);
@@ -39,9 +37,7 @@ if (isset($_GET['key'])) {
         $email = $rows[0]['u_login'];
 
         // Активируем аккаунт пользователя
-        $sql = 'UPDATE `users`
-				SET `u_status` = 1
-				WHERE `u_login` = :email';
+        $sql = 'UPDATE `users` SET `u_status` = 1 WHERE `u_login` = :email';
         // Подготавливаем PDO выражение для SQL запроса
         $stmt = $db->prepare($sql);
         $stmt->bindValue(':email', $email, PDO::PARAM_STR);
@@ -104,9 +100,7 @@ if (isset($_POST['submit'])) {
             /* Проверяем существует ли у нас
               такой пользователь в БД */
 
-            $sql = 'SELECT `u_login`
-					FROM `' . BEZ_DBPREFIX . 'users`
-					WHERE `u_login` = :login';
+            $sql = 'SELECT `u_login` FROM `' . BEZ_DBPREFIX . 'users` WHERE `u_login` = :login';
             // Подготавливаем PDO выражение для SQL запроса
             $stmt = $db->prepare($sql);
             $stmt->bindValue(':login', $_POST['email'], PDO::PARAM_STR);

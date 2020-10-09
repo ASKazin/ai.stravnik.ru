@@ -37,9 +37,9 @@ function showErrorMessage($data)
 {
     if (is_array($data)) {
         foreach ($data as $val)
-            @$err .= '<div class="alert alert-danger" role="alert">' . $val . '</div>' . "\n";
+            @$err .= '<div class="alert alert-danger" role="alert">' . $val . '</div>' . "<br>";
     } else
-        @$err .= '<div class="alert alert-danger" role="alert">' . $data . '</div>' . "\n";
+        @$err .= '<div class="alert alert-danger" role="alert">' . $data . '</div>' . "<br>";
     return $err;
 }
 
