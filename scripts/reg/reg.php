@@ -135,6 +135,7 @@ if (isset($_POST['submit'])) {
                 $stmt = $db->prepare($sql);
                 $stmt->bindValue(':email', $_POST['email'], PDO::PARAM_STR);
                 $stmt->bindValue(':pass', $pass, PDO::PARAM_STR);
+		$stmt->bindValue(':salt', $salt, PDO::PARAM_STR);
                 $stmt->execute();
 
                 $_SESSION['userId'] = $db->lastInsertId();
