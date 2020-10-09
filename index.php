@@ -13,7 +13,7 @@ header('Content-Type: text/html; charset=UTF8');
 ob_start();
 
 //Версия системы
-$version = '0.8.16 от 13.09.2020';
+$version = '0.9.15 от 09.10.2020';
 
 //Определяем переменную для переключателя
 $mode = isset($_GET['mode']) ? $_GET['mode'] : false;
@@ -52,6 +52,18 @@ switch ($mode) {
     case 'auth':
         include 'scripts/auth/auth.php';
         //include 'scripts/auth/auth_form.html';
+        break;
+
+    // Редактор профиля
+    case 'profile_edit':
+        include 'scripts/profile/profile_edit.php';
+        include 'scripts/profile/profile_edit.html';
+        break;
+
+    // Вывод профиля
+    case 'profile':
+        include 'scripts/profile/profile.php';
+        include 'scripts/profile/profile.html';
         break;
 
     // TODO: Добавить обработку ошибок

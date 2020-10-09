@@ -1,0 +1,36 @@
+<div class="col-md-8 col-md-offset-2">
+    <form class="form-horizontal form-signin" action="" method="POST">
+        <div class="form-group">
+            <label for="email" class="control-label">E-mail <font color="red">*</font></label>
+            <input class="form-control" type="email" id="email" name="email" placeholder="E-mail">
+        </div>
+        <div class="form-group">
+            <label for="pass" class="control-label">Пароль <font color="red">*</font></label>
+            <input class="form-control" type="password" id="pass" name="pass" placeholder="Пароль">
+        </div>
+        <div class="form-group">
+            <label for="pass2" class="control-label">Пароль еще раз <font color="red">*</font></label>
+            <input class="form-control" type="password" id="pass2" name="pass2" placeholder="Пароль">
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" required> Даю согласие на обработку персональных данных
+            </label>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" required> Принимаю условия <a href="/files/polzovatelskoe-soglashenie.pdf"
+                                                                     target="_blank">пользовательского соглашения</a>
+            </label>
+        </div>
+        <div class="form-group">
+            <button type="submit" name="submit" class="btn btn-success">Зарегистрироваться</button>
+        </div>
+    </form>
+
+    <div class="alert alert-info" role="alert">Поля со значком <font color="red">*</font> обязательны для заполнения!
+    </div>
+    <div class="alert alert-info" role="alert"><strong>Внимание!</strong> Для регистрации Вам нужно указать действующий
+        <strong>e-mail</strong>!
+    </div>
+</div>
