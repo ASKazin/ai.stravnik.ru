@@ -66,6 +66,12 @@ switch ($mode) {
         include 'scripts/profile/profile.html';
         break;
 
+    // Генератор
+    case 'gen':
+        include 'scripts/gen/generator.html';
+//        include 'scripts/profile/profile.html';
+        break;
+
     // TODO: Добавить обработку ошибок
     case 'error':
         break;

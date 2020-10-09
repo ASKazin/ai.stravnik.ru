@@ -1,0 +1,378 @@
+<?php
+if ($user === false) {
+header('Location:' . BEZ_HOST . '?mode=auth');
+exit;
+}
+?>
+
+<div class="col-lg-8 col-lg-offset-2">
+
+    <h1 class="text-center">Генератор уведомлений</h1>
+
+    <p class="lead">Заполните поля, чтобы создать документ для уведомления органов власти.</p>
+
+    <form onsubmit="datechange()" id="contact-form" method="post" action="gen.php" role="form">
+
+        <div class="messages"></div>
+
+        <div class="controls">
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="form_name">ФИО
+                            <button type="button" data-toggle="modal" data-target="#modal_who-org">
+                                организатора
+                            </button>
+                        </label>
+                        <input pattern="[a-zA-Zа-яёА-ЯЁ0-9_ -]{2,80}" id="form_name" type="text" name="Fff"
+                               class="form-control"
+                               placeholder="Иван Иванов Иванович" required="required"
+                               data-error="Вы не ввели ФИО.">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="form_phone">Номер телефона
+                            <button type="button" data-toggle="modal" data-target="#modal_who-org">
+                                организатора
+                            </button>
+                        </label>
+                        <input pattern="[0-9()+ -]{2,40}" id="form_phone" type="text" name="tel"
+                               class="form-control" placeholder="79290001234">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="modal fade" id="modal_who-org" tabindex="-1" role="dialog"
+                 aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Кто может организовать митинг?</h4>
+                        </div>
+                        <div class="modal-body">
+                            Гражданин или несколько граждан Российской Федерации старше 16 лет, политическая
+                            партия, общественное или религиозное объединение и их подразделения.<br><br>
+                            Вы не можете организовать митинг, если cуд признал вас недееспособным, вы сидите в
+                            тюрьме или имеете непогашенную судимость за преступление против конституционного
+                            строя, либо если вас два и более раз привлекали к ответственности по
+                            административным статьям за нарушение правил проведения акций.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="form_name">Дата,
+                            <button type="button" data-toggle="modal" data-target="#modal_time">время</button>
+                            начала и окончания мероприятия</label>
+                        <p class="floated2"><input form="dev_null" required="required"
+                                                   onchange="change_time_end()" id="datetime_id"
+                                                   class="form-control" type="datetime-local"
+                                                   name="datetime_start">
+                        </p>
+                        <p class="floated"><input required="required" id="time_id" class="form-control"
+                                                  value="20:00" type="time" name="time_end"></p>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+
+                <script type="text/javascript">
+                    // Установка минимального дня для выбора даты мероприятия на текущий день
+                    date_update(3);
+
+                    function date_update(n) {
+                        var today = new Date();
+                        var dd = String(today.getDate() + n).padStart(2, '0');
+                        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                        var yyyy = today.getFullYear();
+
+                        today = yyyy + '-' + mm + '-' + dd + "T06:00:00.00";
+                        var tag = document.getElementById('datetime_id').setAttribute("min", today);
+                    }
+
+                    // Установка минимального времени для выбора даты мероприятия на выбранное началом
+                    function change_time_end() {
+                        document.getElementById('time_id').setAttribute('min', (document.getElementById('datetime_id').value.slice(11, 16)));
+                        document.getElementById('time_id').setAttribute('max', '22:00');
+                    }
+
+                </script>
+
+                <div class="modal fade" id="modal_time" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Когда можно митинговать?</h4>
+                            </div>
+                            <div class="modal-body">
+                                Мероприятия, кроме культурных и памятных, можно проводить с 7 до 22 часов.<br>Если
+                                несколько организаторов хотят использовать площадку в одно и то же время,
+                                разрешат тому, кто раньше подал уведомление.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="form_message">
+                            <button type="button" data-toggle="modal" data-target="#modal_form">Форма</button>
+                            публичного мероприятия</label>
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <select onchange="form_id_check()" id="form_id" class="select-css" name="form">
+                                <option value="собрание">Собрание</option>
+                                <option value="митинг">Митинг</option>
+                                <option value="пикетирование">Пикетирование</option>
+                                <option value="демонстрация">Демонстрация</option>
+                                <option value="шествие">Шествие</option>
+                            </select>
+                        </div>
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <script type="text/javascript">
+                function form_id_check() {
+                    var sel = document.getElementById('form_id').value;
+
+                    if (sel == 'пикетирование') {
+                        document.getElementById('sound_id').setAttribute('hidden', 'true');
+                        date_update(3);
+                    } else {
+                        document.getElementById('sound_id').removeAttribute('hidden');
+                        date_update(10);
+                    }
+                }
+
+            </script>
+
+            <div class="modal fade" id="modal_form" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Какие есть формы публичного
+                                мероприятия?</h4>
+                        </div>
+                        <div class="modal-body">
+                            Собрание — граждане собираются в специальном месте, чтобы обсудить общественно
+                            значимые вопросы.<br>Митинг — граждане массово собираются, чтобы публично выразить
+                            мнение.<br>Демонстрация — граждане массово идут или едут на машинах, иногда с
+                            плакатами, чтобы публично выразить мнение.<br>Шествие — граждане идут по маршруту,
+                            чтобы привлечь внимание к проблеме.<br>Пикет — граждане собираются и стоят у объекта
+                            пикетирования, с плакатами, но без звуковой аппаратуры.<br>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="form_message">
+                            <button type="button" data-toggle="modal" data-target="#modal_place">Место</button>
+                            проведения мероприятия</label>
+                        <input pattern="[a-zA-Zа-яёА-ЯЁ0-9/.,:_ -]{1,80}" id="form_name" type="text"
+                               placeholder="Сквер им. Пушкина" name="place" class="form-control"
+                               required="required" data-error="Вы не ввели место.">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+
+
+                <div class="modal fade" id="modal_place" tabindex="-1" role="dialog"
+                     aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Где нельзя митинговать?</h4>
+                            </div>
+                            <div class="modal-body">
+                                Нельзя митинговать:
+                                <br>
+                                — рядом с опасными производствами;
+                                <br>
+                                — у путепроводов и железнодорожных магистралей;
+                                <br>
+                                — у нефте-, газо- и продуктопроводов, линий электропередач;
+                                <br>
+                                — около резиденций президента;
+                                <br>
+                                — у судов, колоний, СИЗО;
+                                <br>
+                                — в пограничной зоне, если нет разрешения от пограничных органов.
+                                <br>
+                                Возле религиозных объектов запрещено проводить публичные мероприятия, размещать
+                                тексты и изображения, которые могут оскорбить чьи-то религиозные чувства.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="form_message">Предполагаемое
+                            <button type="button" data-toggle="modal" data-target="#modal_count">количество
+                            </button>
+                            участников</label>
+                        <input pattern="[0-9]{1,15}" id="form_message" type="text" name="num"
+                               class="form-control" placeholder="1500"
+                               required="required"
+                               data-error="Вы не ввели предполагаемое количество участников мероприятия.">
+                        <div class="help-block with-errors"></div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="modal fade" id="modal_count" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                    aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Предполагаемое количество участников
+                                мероприятия</h4>
+                        </div>
+                        <div class="modal-body">Если будет установлено, что несоответствие реального количества
+                            участников публичного мероприятия предполагаемому, возникшее по вине организатора
+                            публичного мероприятия, создало реальную угрозу для общественного порядка, то
+                            организатор может быть привлечён к административной ответственности.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-12">
+
+                    <div class="form-group">
+                        <label for="form_message">Цель публичного мероприятия</label>
+                        <textarea id="form_message" name="purpose" class="form-control"
+                                  placeholder="Привлечь внимание к ограничению гражданских свобод" rows="5"
+                                  required="required" data-error="Вы не указали цель мероприятия."></textarea>
+                        <div class="help-block with-errors"></div>
+
+                        <div id="sound_id">
+                            <label for="form_message">Звукоусиливающая аппаратура</label>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <select class="select-css" name="sound">
+                                    <option value="0">Не будет использоваться</option>
+                                    <option value="1">Будет использоваться</option>
+                                </select></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="checkbox" class="filled-in checkcheck" checked id="PersonalDataAgree"
+                                   required/>
+                            <label for="PersonalDataAgree" style="margin-top:30px;margin-bottom:-30px;"></label>
+                            <input type="text" name="PersonalDataAgree" value="true" data-val="true"
+                                   data-val-required="Требуется соглашение на обработку персональных данных"
+                                   style="position:absolute;left:-999999px;"/>
+
+                            <span>Я <a target="_blank" href="/?mode=legal">согласен</a> на обработку моих персональных данных</span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="checkbox" class="filled-in checkcheck" checked id="public"
+                                   name="public" value="true"/>
+                            <label for="public" style="margin-top:30px;margin-bottom:-30px;"></label>
+                            <span>Опубликовать заявку на главной странице</span>
+                        </div>
+                    </div>
+                    <br>
+
+                    <!-- TODO: Добавить поле для загрузки изображения --> <!-- TODO 2: Какого изображения? -->
+                    <div class="col-md-12">
+                        <input type="submit" class="btn btn-success btn-send" value="Создать">
+                        <p align="right" class="floated"><a class="btn btn-success btn-send"
+                                                            href="/">Вернуться</a></p>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <input hidden type="text" id="valid_timestart" name="valid_timestart">
+
+    </form>
+
+</div><!-- /.col-lg-8 col-lg-offset-2 -->
+
+<script type="text/javascript">
+    function datechange() {
+        var sel = document.getElementById('datetime_id').value;
+        var sel = sel.split('-');
+        sel[2] = sel[2].split('T');
+        switch (sel[1]) {
+            case '01':
+                sel[1] = 'января ';
+                break;
+            case '02':
+                sel[1] = 'декабря ';
+                break;
+            case '03':
+                sel[1] = 'марта ';
+                break;
+            case '04':
+                sel[1] = 'апреля ';
+                break;
+            case '05':
+                sel[1] = 'мая ';
+                break;
+            case '06':
+                sel[1] = 'июня ';
+                break;
+            case '07':
+                sel[1] = 'июля ';
+                break;
+            case '08':
+                sel[1] = 'августа ';
+                break;
+            case '09':
+                sel[1] = 'сентября ';
+                break;
+            case '10':
+                sel[1] = 'октября ';
+                break;
+            case '11':
+                sel[1] = 'ноября ';
+                break;
+            case '12':
+                sel[1] = 'декабря ';
+                break;
+            default:
+                sel[1] = 'invalid';
+        }
+        document.getElementById('valid_timestart').setAttribute('value', sel[2][0] + ' ' + sel[1] + sel[0] + ' с ' + sel[2][1] + ' до ');
+    }
+
+</script>
