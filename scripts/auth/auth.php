@@ -57,7 +57,7 @@ if (isset($_POST['submit'])) {
         // Если логин совпадает, проверяем пароль
         if (count($rows) > 0) {
             // Получаем данные из таблицы
-            if (hash('sha256',$_POST['password'].$rows[0]['salt']) == $rows[0]['u_password']) {
+            if (hash('sha256', $_POST['password'] . $rows[0]['salt']) == $rows[0]['u_password']) {
                 $_SESSION['user'] = true;
                 $_SESSION['userId'] = $rows[0]['u_id'];
                 $_SESSION['userLogin'] = $rows[0]['u_login'];
