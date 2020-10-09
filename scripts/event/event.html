@@ -28,15 +28,13 @@
     <strong>Просмотров страницы: </strong><?php echo $views; ?>
     <br>
     <strong>Собираются посетить: </strong><?php echo $members; ?>
-    <form class="form-inline">
+    <form class="form-inline" action="" method="POST">
         <div class="form-group">
             <span class="help-block">Собираетесь посетить?</span>
         </div>
         <br>
         <div class="form-group">
-            <div class="">
-                <button type="submit" class="uk-button uk-button-primary">Я пойду!</button>
-            </div>
+            <button type="submit" class="btn btn-info" id="yes" name="yes">Я пойду!</button>
         </div>
     </form>
 </div>

@@ -31,6 +31,21 @@ if ($stmt->execute()) {
         $members = htmlspecialchars($rows[0]['members']);
         $creation_date = date("d.m.y H:i", strtotime($rows[0]['creation_date']));
 
+        $sql = 'UPDATE `requests` SET `views` = :views WHERE `id`=:id';
+        $stmt = $db->prepare($sql);
+        $stmt->bindValue(':views', (int)$views + 1, PDO::PARAM_STR);
+        $stmt->bindValue(':id', (int)$_GET['id'], PDO::PARAM_STR);
+        $stmt->execute();
+
+        if (isset($_POST['yes'])) {
+            $sql = 'UPDATE `requests` SET `members` = :members WHERE `id`=:id';
+            $stmt = $db->prepare($sql);
+            $stmt->bindValue(':members', (int)$members + 1, PDO::PARAM_STR);
+            $stmt->bindValue(':id', (int)$_GET['id'], PDO::PARAM_STR);
+            $stmt->execute();
+            header('Location:' . BEZ_HOST . '?mode=event&id=' . (int)$_GET['id']);
+        }
+
         $pageTitle = 'Тип мероприятия: ' . $format . ' (id: ' . (int)$_GET['id'] . ')';
         $h1Title = 'Тип мероприятия: ' . $format;
         $subTitle = 'Дата проведения: ' . $date;
