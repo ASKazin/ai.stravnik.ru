@@ -11,6 +11,7 @@ if ($user === false) { ?>
     <li><a href="<?php echo BEZ_HOST; ?>?mode=index">Главная</a></li>
     <li><a href="<?php echo BEZ_HOST; ?>?mode=auth">Войти</a></li>
     <li><a href="<?php echo BEZ_HOST; ?>?mode=reg">Регистрация</a></li>
+    <li><a href="<?php echo BEZ_HOST; ?>?mode=about">О проекте</a></li>
     <?php
 }
 
