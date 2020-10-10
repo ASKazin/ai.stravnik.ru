@@ -13,7 +13,7 @@ header('Content-Type: text/html; charset=UTF8');
 ob_start();
 
 //Версия системы
-$version = '0.9.15 от 09.10.2020';
+$version = '0.9.17 от 10.10.2020';
 
 //Определяем переменную для переключателя
 $mode = isset($_GET['mode']) ? $_GET['mode'] : false;
