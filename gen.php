@@ -107,7 +107,7 @@ if ($exec_check and !empty($public_var)) {
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':fio_org', $_POST['Fff'], PDO::PARAM_STR);
     $stmt->bindValue(':tel_org', $_POST['tel'], PDO::PARAM_STR);
-    $stmt->bindValue(':id_org', '3', PDO::PARAM_STR); // TODO: Прокинуть id из сессии
+    $stmt->bindValue(':id_org', $userId, PDO::PARAM_STR); // TODO: Прокинуть id из сессии
     $stmt->bindValue(':format', $_POST['form'], PDO::PARAM_STR);
     $stmt->bindValue(':place', $_POST['place'], PDO::PARAM_STR);
     $stmt->bindValue(':date', $date_var, PDO::PARAM_STR);
