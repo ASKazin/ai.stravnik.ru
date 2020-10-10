@@ -82,6 +82,11 @@ switch ($mode) {
         include 'scripts/event/event.html';
         break;
 
+    // Подключаем "О проекте"
+    case 'about':
+        include 'scripts/about/about.html';
+        break;
+
     case 'legal':
         include 'scripts/legal/politika-konfidencialnosti.html';
         break;
